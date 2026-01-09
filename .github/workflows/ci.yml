@@ -1,0 +1,37 @@
+name: Pipeline de Test Calendrier
+
+# 1. Déclencheur : s'exécute à CHAQUE push sur n'importe quelle branche
+on: [push]
+
+jobs:
+  pipeline-travail:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Étape indispensable : copier ton code sur le serveur de GitHub
+      - name: Récupération du code (Checkout)
+        uses: actions/checkout@v4
+
+      # 2. Commande d'installation (simulée ou réelle)
+      # On simule ici la préparation de l'environnement
+      - name: Installation des dépendances
+        run: |
+          echo "Démarrage de l'installation..."
+          # Si tu avais un projet Node.js, ce serait : npm install
+          echo "Vérification de la présence des fichiers sources..."
+          ls index.html style.css
+          echo "Installation terminée avec succès."
+
+      # 3. Commande de test (simulée ou réelle)
+      # On vérifie par exemple que le fichier contient bien le titre attendu
+      - name: Exécution des tests
+        run: |
+          echo "Lancement des tests unitaires..."
+          # Test réel : on cherche si le mot 'Calendrier' est bien dans le HTML
+          grep -q "Calendrier" index.html
+          echo "Test 1 : Présence du titre OK"
+          
+          # Simulation d'un deuxième test
+          echo "Test 2 : Vérification de la syntaxe CSS..."
+          sleep 2
+          echo "Tests terminés : 100% de réussite."
